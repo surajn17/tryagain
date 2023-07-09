@@ -21,11 +21,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 'bash -s' << 'EOF'
             sudo apt-get update
-            sudo apt-get remove moby-containerd containerd
-            sudo apt-get remove moby-runc runc
-            sudo apt-get clean
-            sudo apt-get install -y containerd runc
             sudo apt-get install -y docker.io
             sudo apt-get install -y docker-compose
-            docker-compose up -d
+            docker-compose -f docker-compose.yml up -d
           EOF
